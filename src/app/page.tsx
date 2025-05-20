@@ -1,103 +1,159 @@
+"use client";
+import React from "react";
 import Image from "next/image";
+import {
+  RiScissors2Line,
+  RiUser3Line,
+  RiCalendarCheckLine,
+  RiInstagramLine,
+  RiFacebookBoxLine,
+} from "react-icons/ri";
+import img from "./components/IMG_5348.jpg";
+import img1 from "./components/l.jpg";
+import img2 from "./components/02.jpg";
+import Link from "next/link";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div
+      className="container mx-auto min-h-screen bg-cover bg-center bg-no-repeat text-white"
+      style={{ backgroundImage: 'url("/components/your-barbershop-bg.png")' }}
+    >
+      {/* Hero Section */}
+      <main className="flex flex-col items-center justify-center text-center pt-32 h-170 px-4 md:px-16 animate-fade-in-up">
+        <h1 className="text-4xl md:text-6xl font-bold text-amber-100 drop-shadow-lg">
+          Welcome to MyBarber
+        </h1>
+        <p className="mt-4 text-lg md:text-xl text-amber-50">
+          Premium grooming experience. Classic cuts. Modern style.
+        </p>
+        <div className="mt-6 flex gap-4">
+          <Link
+            href="/services"
+            className="px-6 py-3 rounded-xl bg-amber-300 text-black font-semibold shadow-md hover:bg-amber-400 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Book Now
+          </Link>
+          <Link
+            href="/services"
+            className="px-6 py-3 rounded-xl border border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-black transition"
           >
-            Read our docs
-          </a>
+            Services
+          </Link>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Our Work Section */}
+      <section className="py-16 rounded-3xl px-4 md:px-16 bg-black bg-opacity-60 mt-20">
+        <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-center text-amber-200">
+          Our Work
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {[img, img1, img2].map((image, index) => (
+            <div className="relative group" key={index}>
+              <Image
+                src={image}
+                alt={`cut${index + 1}`}
+                className="rounded-xl shadow-md object-cover transition-transform duration-300 group-hover:scale-105"
+                width={400}
+                height={300}
+              />
+              <div className="absolute inset-0 backdrop-blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-xl">
+                <p className="text-white text-lg font-semibold">
+                  {["Classic Cut", "Modern Style", "Sharp Look"][index]}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-16 px-4 md:px-16 text-center animate-fade-in-up">
+        <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-amber-100 transition-all duration-500 ease-in-out">
+          Why Choose Us?
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {[
+            {
+              Icon: RiScissors2Line,
+              title: "Professional Cuts",
+              desc: "Top-level barbers with years of experience.",
+            },
+            {
+              Icon: RiUser3Line,
+              title: "Personalized Style",
+              desc: "Each haircut tailored to your look.",
+            },
+            {
+              Icon: RiCalendarCheckLine,
+              title: "Easy Booking",
+              desc: "Schedule appointments online anytime.",
+            },
+          ].map(({ Icon, title, desc }, idx) => (
+            <div
+              key={idx}
+              className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-3xl shadow-xl p-8 flex flex-col items-center hover:scale-105 transition-all duration-500 ease-in-out hover:shadow-2xl group"
+            >
+              <div className="bg-amber-200 rounded-full p-4 transition-transform group-hover:rotate-12">
+                <Icon size={64} className="text-amber-600" />
+              </div>
+              <h3 className="text-2xl font-bold mt-6 text-gray-800 group-hover:text-amber-600 transition-colors duration-300">
+                {title}
+              </h3>
+              <p className="mt-3 text-center text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
+                {desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-4 md:px-16 bg-white bg-opacity-10 text-center rounded-3xl">
+        <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-emerald-950">
+          What Clients Say
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              quote:
+                "Great atmosphere and top-notch service! Highly recommended.",
+              author: "— Alex M.",
+            },
+            {
+              quote:
+                "The best haircut I’ve had in years. Clean, professional and stylish.",
+              author: "— Jamie R.",
+            },
+            {
+              quote:
+                "Easy booking and amazing results. I'll definitely be coming back.",
+              author: "— Sam T.",
+            },
+          ].map(({ quote, author }, i) => (
+            <div key={i} className="bg-black bg-opacity-30 p-6 rounded-xl">
+              <p>{quote}</p>
+              <span className="block mt-4 font-bold">{author}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-6 px-8 bg-black bg-opacity-70 text-center text-amber-200 mt-12">
+        <p className="mb-2">&copy; 2025 MyBarber. All rights reserved.</p>
+        <div className="flex justify-center gap-4">
+          <a href="#" aria-label="Instagram">
+            <RiInstagramLine size={24} />
+          </a>
+          <a href="#" aria-label="Facebook">
+            <RiFacebookBoxLine size={24} />
+          </a>
+        </div>
       </footer>
     </div>
   );
-}
+};
+
+export default Home;
