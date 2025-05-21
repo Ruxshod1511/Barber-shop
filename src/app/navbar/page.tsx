@@ -48,12 +48,16 @@ const Navbar = () => {
             </SignedOut>
 
             <SignedIn>
-              <div className="flex items-center gap-2">
+              <Link
+                prefetch
+                href="/booking"
+                className="flex items-center gap-2"
+              >
                 <UserButton afterSignOutUrl="/" />
                 <span className="text-lg font-medium text-gray-700">
                   Profile
                 </span>
-              </div>
+              </Link>
             </SignedIn>
           </Link>
         </div>
