@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 type Booking = {
   id: string;
   day: string;
+  services: string;
   time: string;
   master: string;
 };
@@ -42,7 +43,7 @@ const Page = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Mening bronlarim</h1>
+      <h1 className="text-xl font-bold mb-4 text-amber-50">Mening bronlarim</h1>
       {userBookings.length === 0 ? (
         <p>Bron topilmadi.</p>
       ) : (

@@ -1,17 +1,17 @@
 "use client";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { db } from "@/app/components/Firebase.config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import { useUser } from "@clerk/nextjs";
-import { FaCalendarAlt, FaClock, FaUserTie } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 import Select from "react-select";
 
 // Booking type
 type Booking = {
   userId: string;
   serviceId: string;
+  service: string;
   day: string;
   master: string;
   time: string;
@@ -20,7 +20,6 @@ type Booking = {
 };
 
 const Page = () => {
-  const { id } = useParams();
   const [days] = useState<string[]>(["Dushanba", "Seshanba", "Chorshanba"]);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [masters, setMasters] = useState<string[]>([]);
@@ -159,6 +158,7 @@ const Page = () => {
   return (
     <div className="min-h-screen text-white flex items-center justify-center p-6">
       <Toaster />
+      <div className="absolute top-0 left-0 right-0 bottom-0 bg-cover bg-center bg-no-repeat "></div>
       <div className="w-full max-w-md bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl space-y-6">
         <h1 className="text-2xl font-bold text-center text-[#F8CB47]">
           Xizmat Band Qilish
