@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { db } from "@/app/components/Firebase.config";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { FaUserTie, FaCalendarAlt, FaClock } from "react-icons/fa";
 
 // Bron ma'lumotlari uchun to'liq tip

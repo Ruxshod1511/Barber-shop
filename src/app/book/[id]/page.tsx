@@ -182,7 +182,7 @@ const Page = () => {
         </h1>
 
         <p className="text-base lg:text-lg max-w-full lg:max-w-xl text-gray-300">
-          Whether you're looking for a precise haircut, a luxurious shave, or
+          Whether youre looking for a precise haircut, a luxurious shave, or
           expert beard grooming, our team is here to craft the perfect style
           just for you. Secure your spot today and experience the difference!
         </p>
@@ -311,7 +311,7 @@ const Page = () => {
         <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg w-full max-w-sm space-y-4">
             <h3 className="text-lg font-bold text-center text-black">
-              Ma'lumotlaringiz
+              Malumotlaringiz
             </h3>
             <input
               type="text"

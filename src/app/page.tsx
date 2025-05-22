@@ -5,8 +5,6 @@ import {
   RiScissors2Line,
   RiUser3Line,
   RiCalendarCheckLine,
-  RiInstagramLine,
-  RiFacebookBoxLine,
 } from "react-icons/ri";
 import img from "./components/IMG_5348.jpg";
 import img1 from "./components/l.jpg";
