@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   SignInButton,
@@ -27,39 +29,32 @@ const Navbar = () => {
               Menu
             </span>
           </Link>
-          <Link
-            prefetch
-            href="/profile"
-            className="p-2 w-30 h-12 rounded-2xl bg-gradient-to-r from-amber-100 to-amber-200 flex items-center justify-between shadow-sm"
-          >
-            <SignedOut>
-              <div className="flex items-center gap-2">
-                <SignInButton mode="modal">
-                  <button className="text-lg text-gray-700 font-medium">
-                    Login
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="text-lg text-gray-700 font-medium">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </div>
-            </SignedOut>
 
-            <SignedIn>
-              <Link
-                prefetch
-                href="/booking"
-                className="flex items-center gap-2"
-              >
-                <UserButton afterSignOutUrl="/" />
-                <span className="text-lg font-medium text-gray-700">
-                  Profile
-                </span>
-              </Link>
-            </SignedIn>
-          </Link>
+          <SignedOut>
+            <div className="p-2 w-30 h-12 rounded-2xl bg-gradient-to-r from-amber-100 to-amber-200 flex items-center gap-4 shadow-sm">
+              <SignInButton mode="modal">
+                <button className="text-lg text-gray-700 font-medium">
+                  Login
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="text-lg text-gray-700 font-medium">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </div>
+          </SignedOut>
+
+          <SignedIn>
+            <Link
+              prefetch
+              href="/booking"
+              className="p-2 w-30 h-12 rounded-2xl bg-gradient-to-r from-amber-100 to-amber-200 flex items-center gap-2 shadow-sm"
+            >
+              <UserButton />
+              <span className="text-lg font-medium text-gray-700">Profile</span>
+            </Link>
+          </SignedIn>
         </div>
       </div>
 
@@ -74,8 +69,9 @@ const Navbar = () => {
             My<span className="text-amber-300">Barber</span>
           </Link>
         </div>
+
         <div className="flex items-center gap-10">
-          <div className="flex  items-center text-center hover:scale-105 transition-all">
+          <div className="flex items-center text-center hover:scale-105 transition-all">
             <RiMenu2Line size={24} className="text-amber-400 mt-1 me-1" />
             <Link
               prefetch
@@ -85,7 +81,8 @@ const Navbar = () => {
               Menu
             </Link>
           </div>
-          <div className="flex  items-center text-center hover:scale-105 transition-all">
+
+          <div className="flex items-center text-center hover:scale-105 transition-all">
             <CiBookmarkCheck size={24} className="text-amber-400 mt-1 me-1" />
             <Link
               prefetch
@@ -96,6 +93,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
+
         <div className="flex items-center gap-4">
           <SignedOut>
             <SignInButton />

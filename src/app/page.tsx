@@ -143,14 +143,6 @@ const Home = () => {
       {/* Footer */}
       <footer className="py-6 px-8 bg-black bg-opacity-70 text-center text-amber-200 mt-12">
         <p className="mb-2">&copy; 2025 MyBarber. All rights reserved.</p>
-        <div className="flex justify-center gap-4">
-          <a href="#" aria-label="Instagram">
-            <RiInstagramLine size={24} />
-          </a>
-          <a href="#" aria-label="Facebook">
-            <RiFacebookBoxLine size={24} />
-          </a>
-        </div>
       </footer>
     </div>
   );

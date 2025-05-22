@@ -8,6 +8,7 @@ import { FaUserTie, FaCalendarAlt, FaClock } from "react-icons/fa";
 type Booking = {
   id: string;
   day: string;
+  services: string;
   time: string;
   master: string;
   name?: string;
@@ -15,7 +16,7 @@ type Booking = {
 };
 
 const AdminBookPage = () => {
-  const [bookings, setBookings] = useState<Booking[]>([]); // ✅ any o‘rniga Booking[]
+  const [bookings, setBookings] = useState<Booking[]>([]);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -29,18 +30,6 @@ const AdminBookPage = () => {
 
     fetchBookings();
   }, []);
-
-  function handleDelete(id: string) {
-    const barberDocRef = doc(db, "book", id);
-    deleteDoc(barberDocRef)
-      .then(() => {
-        setBookings((prevData) => prevData.filter((item) => item.id !== id));
-      })
-      .catch((error) => {
-        console.error("Error deleting document:", error);
-        alert("Failed to delete booking.");
-      });
-  }
 
   return (
     <div className="min-h-screen mt-10 p-6">
@@ -63,6 +52,9 @@ const AdminBookPage = () => {
                 <FaCalendarAlt /> {b.day}
               </p>
               <p className="flex items-center gap-2 text-amber-50">
+                {b.services}
+              </p>
+              <p className="flex items-center gap-2 text-amber-50">
                 <FaClock /> {b.time}
               </p>
               <p className="mt-2 text-sm text-amber-50">
@@ -71,12 +63,6 @@ const AdminBookPage = () => {
               <p className="text-sm text-amber-50">
                 📞 <strong>Telefon:</strong> {b.phone || "—"}
               </p>
-              <button
-                onClick={() => handleDelete(b.id)}
-                className="text-amber-300 active:bg-amber-800 active:text-amber-50 w-10 bg-amber-950 text-center rounded-2xl mt-3"
-              >
-                ✓
-              </button>
             </div>
           ))}
         </div>
