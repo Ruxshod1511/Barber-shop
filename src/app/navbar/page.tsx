@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   SignInButton,
@@ -5,15 +6,17 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-  ClerkProvider,
 } from "@clerk/nextjs";
+import "../navbar/index.css";
 import { RiMenu2Line } from "react-icons/ri";
-import { CiBookmarkCheck } from "react-icons/ci";
 import Link from "next/link";
+import { clsx } from "clsx"; // 👈 clsx chaqirish
 
 const Navbar = () => {
+  const isActive = true;
+
   return (
-    <ClerkProvider>
+    <>
       {/* 📱 Mobile navbar */}
       <div className="flex md:hidden flex-col items-center justify-center w-full p-3">
         <div className="w-11/12 h-20 fixed bottom-5 rounded-3xl backdrop-blur-xl shadow-lg border border-gray-300 flex items-center justify-between px-6 bg-white/10">
@@ -27,6 +30,7 @@ const Navbar = () => {
               Menu
             </span>
           </Link>
+
           <Link
             prefetch
             href="/profile"
@@ -64,7 +68,7 @@ const Navbar = () => {
       </div>
 
       {/* 💻 Desktop navbar */}
-      <div className="hidden md:flex fixed top-0 left-0 right-0 h-16 px-8 bg-white/10 backdrop-blur-md border-b border-gray-300 shadow-md z-50 items-center justify-between">
+      <div className="hidden md:flex fixed top-0 left-0 right-0 h-16 px-8 bg-white/10 backdrop-blur-md  shadow-md z-50 items-center justify-between">
         <div className="flex items-center gap-3">
           <Link
             prefetch
@@ -74,28 +78,24 @@ const Navbar = () => {
             My<span className="text-amber-300">Barber</span>
           </Link>
         </div>
+
         <div className="flex items-center gap-10">
-          <div className="flex  items-center text-center hover:scale-105 transition-all">
-            <RiMenu2Line size={24} className="text-amber-400 mt-1 me-1" />
+          <div className="flex items-center text-center hover:scale-105 transition-all">
             <Link
               prefetch
               href="/services"
-              className="text-sm font-medium text-white mt-1"
+              className={clsx("text", isActive && "text-white font-bold")}
             >
-              Menu
+              Home
             </Link>
           </div>
-          <div className="flex  items-center text-center hover:scale-105 transition-all">
-            <CiBookmarkCheck size={24} className="text-amber-400 mt-1 me-1" />
-            <Link
-              prefetch
-              href="/booking"
-              className="text-sm font-medium text-white mt-1 cursor-pointer"
-            >
+          <div className="flex items-center text-center hover:scale-105 transition-all">
+            <Link prefetch href="/booking" className={"text"}>
               Bookings
             </Link>
           </div>
         </div>
+
         <div className="flex items-center gap-4">
           <SignedOut>
             <SignInButton />
@@ -106,7 +106,7 @@ const Navbar = () => {
           </SignedIn>
         </div>
       </div>
-    </ClerkProvider>
+    </>
   );
 };
 

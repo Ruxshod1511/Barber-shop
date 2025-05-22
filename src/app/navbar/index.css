@@ -1,0 +1,9 @@
+.text {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #979797;
+  transition: background 0.3s, color 0.3s;
+}

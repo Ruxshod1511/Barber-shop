@@ -54,7 +54,7 @@ const Home = () => {
               <Image
                 src={image}
                 alt={`cut${index + 1}`}
-                className="rounded-xl shadow-md object-cover transition-transform duration-300 group-hover:scale-105"
+                className="rounded-xl shadow-md h-100 object-cover transition-transform duration-300 group-hover:scale-105"
                 width={400}
                 height={300}
               />

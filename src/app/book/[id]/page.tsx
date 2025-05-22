@@ -6,6 +6,7 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import { useUser } from "@clerk/nextjs";
 import { FaCalendarAlt, FaClock, FaUserTie } from "react-icons/fa";
+import Select from "react-select";
 
 // Booking type
 type Booking = {
@@ -26,7 +27,14 @@ const Page = () => {
   const [selectedMaster, setSelectedMaster] = useState<string | null>(null);
   const [times, setTimes] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [bookings, setBookings] = useState<Booking[]>([]); // ✅ tip qo‘shildi
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [serviceOptions, setServiceOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [selectedService, setSelectedService] = useState<{
+    label: string;
+    value: string;
+  } | null>(null);
 
   const [showModal, setShowModal] = useState(false);
   const [userName, setUserName] = useState("");
@@ -67,6 +75,16 @@ const Page = () => {
       return data.name;
     });
     setMasters(masterData);
+
+    const serviceSnap = await getDocs(collection(db, "services"));
+    const serviceData = serviceSnap.docs.map((doc) => {
+      const data = doc.data() as { name: string };
+      return {
+        label: data.name,
+        value: doc.id,
+      };
+    });
+    setServiceOptions(serviceData);
   };
 
   const filterAvailableTimes = () => {
@@ -91,10 +109,11 @@ const Page = () => {
   };
 
   const confirmBooking = async () => {
-    if (!selectedDay || !selectedMaster || !selectedTime) return;
+    if (!selectedDay || !selectedMaster || !selectedTime || !selectedService)
+      return;
 
     if (!userName || !phoneNumber) {
-      toast.error("❌ Iltimos, barcha maydonlarni to‘ldiring.", {
+      toast.error("\u274C Iltimos, barcha maydonlarni to‘ldiring.", {
         position: "top-center",
       });
       return;
@@ -105,11 +124,11 @@ const Page = () => {
         b.day === selectedDay &&
         b.master === selectedMaster &&
         b.time === selectedTime &&
-        b.serviceId === id
+        b.serviceId === selectedService.value
     );
 
     if (duplicate) {
-      toast.error("❌ Bu vaqtda siz allaqachon bron qilgansiz.", {
+      toast.error("\u274C Bu vaqtda siz allaqachon bron qilgansiz.", {
         position: "top-center",
       });
       return;
@@ -117,7 +136,8 @@ const Page = () => {
 
     await addDoc(collection(db, "book"), {
       userId: user?.id || "",
-      serviceId: id,
+      serviceId: selectedService.value,
+      service: selectedService.label,
       day: selectedDay,
       master: selectedMaster,
       time: selectedTime,
@@ -125,7 +145,7 @@ const Page = () => {
       phone: phoneNumber,
     });
 
-    toast.success("✅ Bron muvaffaqiyatli amalga oshirildi!", {
+    toast.success("\u2705 Bron muvaffaqiyatli amalga oshirildi!", {
       position: "top-center",
     });
 
@@ -165,9 +185,8 @@ const Page = () => {
 
         <div className="space-y-4">
           <div className="relative">
-            <FaUserTie className="absolute left-3 top-3 text-[#55BE9D]" />
             <select
-              className="w-full pl-10 p-3 rounded bg-white text-[#2A2A2A] font-medium"
+              className="w-full pl-10 p-3 rounded bg-white text-[#2A2A2A] font-medium py-2"
               value={selectedMaster || ""}
               onChange={(e) => setSelectedMaster(e.target.value)}
             >
@@ -181,9 +200,8 @@ const Page = () => {
           </div>
 
           <div className="relative">
-            <FaClock className="absolute left-3 top-3 text-[#55BE9D]" />
             <select
-              className="w-full pl-10 p-3 rounded bg-white text-[#2A2A2A] font-medium"
+              className="w-full pl-10 p-3 rounded bg-white text-[#2A2A2A] font-medium py-2"
               value={selectedTime || ""}
               onChange={(e) => setSelectedTime(e.target.value)}
               disabled={!selectedMaster}
@@ -196,13 +214,23 @@ const Page = () => {
               ))}
             </select>
           </div>
+
+          <div className="relative">
+            <Select
+              className="text-black"
+              options={serviceOptions}
+              value={selectedService}
+              onChange={(option) => setSelectedService(option)}
+              placeholder="Xizmatni tanlang"
+            />
+          </div>
         </div>
 
         <button
           onClick={openModal}
-          disabled={!selectedTime}
+          disabled={!selectedTime || !selectedService}
           className={`w-full py-3 rounded font-semibold text-lg transition ${
-            selectedTime
+            selectedTime && selectedService
               ? "bg-[#55BE9D] hover:bg-[#47ab8a]"
               : "bg-gray-500 cursor-not-allowed"
           }`}
@@ -211,7 +239,6 @@ const Page = () => {
         </button>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 w-full max-w-sm text-[#2A2A2A] space-y-4">
